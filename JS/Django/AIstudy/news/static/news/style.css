@@ -1,0 +1,342 @@
+/* 基础样式 */
+:root {
+    --primary-color: #6C5CE7;
+    --secondary-color: #A8A5E6;
+    --text-dark: #2D3436;
+    --text-light: #FFFFFF;
+    --gradient-bg: linear-gradient(135deg, #6C5CE7 0%, #8E7CFF 100%);
+}
+
+/* body {
+    font-family: 'Noto Sans SC', sans-serif;
+    color: var(--text-dark);
+    background-image: url("images/background_3.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover; */
+    
+    /* 移动端优化 */
+    /* @media (max-width: 768px) {
+        background-size: contain;
+        background-attachment: scroll;
+    }
+} */
+
+/* 视频容器样式 */
+.video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;    /* 视口宽度100% */
+    height: 100vh;   /* 视口高度100% */
+    overflow: hidden;
+    z-index: -1;     /* 确保在内容层下方 */
+}
+
+/* 视频元素样式 */
+.video-bg video {
+    /* 尺寸自适应核心代码 */
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    
+    /* 保持比例并居中 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    /* 保持宽高比 */
+    aspect-ratio: 16/9; /* 根据视频实际比例调整 */
+    
+    /* 填充模式（关键属性） */
+    object-fit: cover;
+    
+    /* 性能优化 */
+    pointer-events: none;
+}
+
+/* 移动端适配 */
+@media (orientation: portrait) { /* 竖屏模式 */
+    .video-bg video {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (orientation: landscape) { /* 横屏模式 */
+    .video-bg video {
+        width: auto;
+        height: 100%;
+    }
+}
+
+/* 导航栏 */
+.navbar {
+    background: transparent !important;  /* 新增 */
+    box-shadow: none !important;        /* 新增 */
+    position: relative;                /* 新增层级关系 */
+    z-index: 2;                        /* 确保导航栏在内容上层 */
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* 修改品牌logo容器 */
+
+
+/* 修改或删除原有品牌logo样式 */
+.brand-logo {
+    /* 移除容器背景和阴影 */
+    background: transparent !important;
+    box-shadow: none !important;
+    
+    /* 移除内边距 */
+    padding: 0 !important;
+    
+    /* 保留其他必要样式 */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+}
+
+/* 移除悬停效果 */
+.brand-logo:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* 恢复logo原始尺寸 */
+.logo {
+    height: 36px; /* 恢复原始高度 */
+}
+
+/* 恢复文字大小 */
+.brand-logo span {
+    font-size: 1rem; /* 恢复原始字号 */
+}
+
+/* 移除导航栏所有链接的下划线 */
+.navbar a {
+    text-decoration: none !important;
+}
+
+/* 如果是单独控制品牌链接 */
+.brand-logo {
+    text-decoration: none !important;
+}
+
+/* 主内容区 */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* 搜索区 */
+.hero-section {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.search-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.search-box {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    gap: 1rem;
+    background: var(--text-light);
+    border-radius: 2rem;
+    padding: 0.5rem;
+    box-shadow: 0 4px 20px rgba(108,92,231,0.15);
+}
+
+/* 在您的style.css中添加 */
+.model-select {
+    /* 基础样式 */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%; /* 占据全部可用空间 */
+    max-width: 160px; /* 防止过宽 */
+    padding: 12px 40px 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    box-shadow: 0 4px 20px rgba(108, 92, 231, 0.1);
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 16px;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* 自定义下拉箭头 */
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10L12 15L17 10' stroke='%236C5CE7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+
+/* 悬停状态 */
+.model-select:hover {
+    box-shadow: 0 6px 24px rgba(108, 92, 231, 0.15);
+    transform: translateY(-1px);
+}
+
+/* 聚焦状态 */
+.model-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+}
+
+/* 禁用状态 */
+.model-select:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* 下拉选项样式 (部分浏览器支持) */
+.model-select option {
+    padding: 12px;
+    background: white;
+    color: var(--text-dark);
+    transition: background 0.2s;
+}
+
+.model-select option:hover {
+    background: #f8f9fa !important;
+}
+
+.model-select option:checked {
+    background: var(--primary-color);
+    color: white;
+}
+
+.search-input {
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.search-btn {
+    background: var(--gradient-bg);
+    color: var(--text-light);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* 知识卡片 */
+.carddiy {
+    position: relative;
+    background: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(177,151,252,0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+/* 卡片悬停效果 */
+.carddiy:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(177,151,252,0.15);
+}
+
+/* 顶部图标容器 */
+.carddiy .top {
+    padding: 20px 0 0 20px;
+}
+
+/* 标题动态效果 */
+.carddiy h6 {
+    position: relative;
+    transition: color 0.3s ease;
+    color: #2d3436 !important;
+}
+
+/* 内容区域优化 */ 
+.carddiy p {
+    line-height: 1.6;
+    padding: 0 20px 20px;
+    color: #666 !important;
+}
+
+/* 卡片悬浮装饰线 */
+.carddiy::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #b197fc 0%, #8e7cff 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carddiy:hover::after {
+    opacity: 1;
+}
+
+/* 动态背景效果 */
+.carddiy::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        rgba(177,151,252,0.05) 0%,
+        rgba(255,255,255,0) 50%,
+        rgba(177,151,252,0.05) 100%
+    );
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+/* 加载动画 */
+.loading-dots {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .card-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-box {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>文心小课堂 - 智能学习平台</title>
+    <link rel="stylesheet" href="{% static 'news/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="{% static 'news/bg-video.mp4' %}" as="video">
+</head>
+
+<body>
+    <div class="video-bg">
+        <video autoplay muted loop playsinline>
+            <source src="{% static 'news/images/bg-video_1.webm' %}" type="video/webm">
+            <source src="{% static 'news/images/bg-video_1.mp4' %}" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="./" class="brand-logo">
+                <img src="{% static 'news/images/logo.png' %}" class="logo">
+                <span>文心小课堂</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="container">
+        <!-- 搜索区 -->
+        <section class="hero-section">
+            <h1 class="hero-title">新一代交互式知识学习引擎</h1>
+            <div class="search-container">
+                <div class="search-box">
+                    <select id="modelSelect" class="model-select">
+                        <option value="ernie-3.5-8k">ERNIE-3.5</option>
+                        <option value="ernie-4.5-8k-preview">ERNIE-4.5</option>
+                        <option value="ernie-4.0-8k">ERNIE-4.0</option>
+                    </select>
+                    <input type="text" id="question" class="search-input" placeholder="请输入您要学习的知识点...">
+                    <button class="search-btn" onclick="submitQuestion(this)">
+                        <span class="btn-text">开始学习</span>
+                        <div class="loading-dots"></div>
+                    </button>
+                </div>
+                <p class="search-tip">尝试输入"机器学习"等关键词</p>
+            </div>
+        </section>
+
+        <!-- 知识卡片区 -->
+              <!-- 下部分 -->
+              <div id="section" style="display: none; flex-direction: column; flex: 75%;"><!-- 子元素按照垂直方向向下排序 -->
+        <!-- 下方-----上半部分 -->
+        <div style="flex: 50%; display: flex;">
+            <!-- 左上分区 -->
+            <div style="flex: 50%;">
+                <a style="color: rgb(83, 83, 83); cursor: pointer;"  onclick="sendDataToModPage('title-box1', 'content-box1'); "> 
+                    <div class="carddiy" style="height: 230px; width: 60%;margin-top: 3%;margin-left: 35%;">
+                      <div class="top">
+                        <svg xmlns="http://www.w3.org/2000/svg" class ="svg2"height="1em" viewBox="0 0 576 512">
+                          <style> .svg2{fill:#b197fc;height: 40px;width: 40px;}</style>
+                          <path d="M386.539 111.485l15.096 248.955-10.979-.275c-36.232-.824-71.64 8.783-102.657 27.997-31.016-19.214-66.424-27.997-102.657-27.997-45.564 0-82.07 10.705-123.516 27.723L93.117 129.6c28.546-11.803 61.484-18.115 92.226-18.115 41.173 0 73.836 13.175 102.657 42.544 27.723-28.271 59.013-41.721 98.539-42.544zM569.07 448c-25.526 0-47.485-5.215-70.542-15.645-34.31-15.645-69.993-24.978-107.871-24.978-38.977 0-74.934 12.901-102.657 40.623-27.723-27.723-63.68-40.623-102.657-40.623-37.878 0-73.561 9.333-107.871 24.978C55.239 442.236 32.731 448 8.303 448H6.93L49.475 98.859C88.726 76.626 136.486 64 181.775 64 218.83 64 256.984 71.685 288 93.095 319.016 71.685 357.17 64 394.225 64c45.289 0 93.049 12.626 132.3 34.859L569.07 448zm-43.368-44.741l-34.036-280.246c-30.742-13.999-67.248-21.41-101.009-21.41-38.428 0-74.385 12.077-102.657 38.702-28.272-26.625-64.228-38.702-102.657-38.702-33.761 0-70.267 7.411-101.009 21.41L50.298 403.259c47.211-19.487 82.894-33.486 135.045-33.486 37.604 0 70.817 9.606 102.657 29.644 31.84-20.038 65.052-29.644 102.657-29.644 52.151 0 87.834 13.999 135.045 33.486z"/>
+                        </svg>
+                      </div>
+                      <div style="text-align: left; padding-left: 10px;  margin: 0;margin-top: 3%;">
+                        <h6 class=" bottom" style="font-size: 24px;  margin: 0;" id="title-box1"></h6>
+                        <p style="font-size: 15px; text-indent: 2em; margin-top: 14px; " id="content-box1"> 
+                        </p> 
+                      </div>
+                    </div>
+                  </a>
+            </div>
+            <!-- 右上分区 -->
+            <div style="flex: 50%;">
+                <a style="color: rgb(83, 83, 83); cursor: pointer;"  onclick="sendDataToModPage('title-box2', 'content-box2'); "> 
+                    <div class="carddiy" style="height: 230px; width: 60%;margin-top: 3%;margin-left: 5%;">
+                      <div class="top">
+                        <svg xmlns="http://www.w3.org/2000/svg" class ="svg2"height="1em" viewBox="0 0 576 512">
+                          <style> .svg2{fill:#b197fc;height: 40px;width: 40px;}</style>
+                          <path d="M386.539 111.485l15.096 248.955-10.979-.275c-36.232-.824-71.64 8.783-102.657 27.997-31.016-19.214-66.424-27.997-102.657-27.997-45.564 0-82.07 10.705-123.516 27.723L93.117 129.6c28.546-11.803 61.484-18.115 92.226-18.115 41.173 0 73.836 13.175 102.657 42.544 27.723-28.271 59.013-41.721 98.539-42.544zM569.07 448c-25.526 0-47.485-5.215-70.542-15.645-34.31-15.645-69.993-24.978-107.871-24.978-38.977 0-74.934 12.901-102.657 40.623-27.723-27.723-63.68-40.623-102.657-40.623-37.878 0-73.561 9.333-107.871 24.978C55.239 442.236 32.731 448 8.303 448H6.93L49.475 98.859C88.726 76.626 136.486 64 181.775 64 218.83 64 256.984 71.685 288 93.095 319.016 71.685 357.17 64 394.225 64c45.289 0 93.049 12.626 132.3 34.859L569.07 448zm-43.368-44.741l-34.036-280.246c-30.742-13.999-67.248-21.41-101.009-21.41-38.428 0-74.385 12.077-102.657 38.702-28.272-26.625-64.228-38.702-102.657-38.702-33.761 0-70.267 7.411-101.009 21.41L50.298 403.259c47.211-19.487 82.894-33.486 135.045-33.486 37.604 0 70.817 9.606 102.657 29.644 31.84-20.038 65.052-29.644 102.657-29.644 52.151 0 87.834 13.999 135.045 33.486z"/>
+                        </svg>
+                      </div>
+                      <div style="text-align: left; padding-left: 10px;  margin: 0;margin-top: 3%;">
+                        <h6 class=" bottom" style="font-size: 24px;  margin: 0;" id="title-box2"></h6>
+                        <p style="font-size: 15px; text-indent: 2em; margin-top: 14px; " id="content-box2"> 
+                        </p> 
+                      </div>
+                    </div>
+                  </a>
+            </div>
+        </div>
+    
+        <!-- 下方-----下半部分 -->
+        <div style="flex: 50%; display: flex;">
+            <!-- 左下分区 -->
+            <div style="flex: 50%;">
+                <a style="color: rgb(83, 83, 83); cursor: pointer;"  onclick="sendDataToModPage('title-box3', 'content-box3'); "> 
+                    <div class="carddiy" style="height: 230px; width: 60%;margin-top: 3%;margin-left: 35%;">
+                      <div class="top">
+                        <svg xmlns="http://www.w3.org/2000/svg" class ="svg2"height="1em" viewBox="0 0 576 512">
+                          <style> .svg2{fill:#b197fc;height: 40px;width: 40px;}</style>
+                          <path d="M386.539 111.485l15.096 248.955-10.979-.275c-36.232-.824-71.64 8.783-102.657 27.997-31.016-19.214-66.424-27.997-102.657-27.997-45.564 0-82.07 10.705-123.516 27.723L93.117 129.6c28.546-11.803 61.484-18.115 92.226-18.115 41.173 0 73.836 13.175 102.657 42.544 27.723-28.271 59.013-41.721 98.539-42.544zM569.07 448c-25.526 0-47.485-5.215-70.542-15.645-34.31-15.645-69.993-24.978-107.871-24.978-38.977 0-74.934 12.901-102.657 40.623-27.723-27.723-63.68-40.623-102.657-40.623-37.878 0-73.561 9.333-107.871 24.978C55.239 442.236 32.731 448 8.303 448H6.93L49.475 98.859C88.726 76.626 136.486 64 181.775 64 218.83 64 256.984 71.685 288 93.095 319.016 71.685 357.17 64 394.225 64c45.289 0 93.049 12.626 132.3 34.859L569.07 448zm-43.368-44.741l-34.036-280.246c-30.742-13.999-67.248-21.41-101.009-21.41-38.428 0-74.385 12.077-102.657 38.702-28.272-26.625-64.228-38.702-102.657-38.702-33.761 0-70.267 7.411-101.009 21.41L50.298 403.259c47.211-19.487 82.894-33.486 135.045-33.486 37.604 0 70.817 9.606 102.657 29.644 31.84-20.038 65.052-29.644 102.657-29.644 52.151 0 87.834 13.999 135.045 33.486z"/>
+                        </svg>
+                      </div>
+                      <div style="text-align: left; padding-left: 10px;  margin: 0;margin-top: 3%;">
+                        <h6 style="font-size: 24px;  margin: 0;" id="title-box3"></h6>
+                        <p style="font-size: 15px; margin-top: 14px; text-indent: 2em;" id="content-box3"> <!-- 首行缩进 -->
+                        </p> 
+                      </div>
+                    </div>
+                  </a>
+            </div>
+            <!-- 右下分区 -->
+            <div style="flex: 50%;">
+                <a style="color: rgb(83, 83, 83); cursor: pointer;"  onclick="sendDataToModPage('title-box4', 'content-box4'); "> 
+                    <div class="carddiy" style="height: 230px; width: 60%;margin-top: 3%;margin-left: 5%;">
+                      <div class="top">
+                        <svg xmlns="http://www.w3.org/2000/svg" class ="svg2"height="1em" viewBox="0 0 576 512">
+                          <style> .svg2{fill:#b197fc;height: 40px;width: 40px;}</style>
+                          <path d="M386.539 111.485l15.096 248.955-10.979-.275c-36.232-.824-71.64 8.783-102.657 27.997-31.016-19.214-66.424-27.997-102.657-27.997-45.564 0-82.07 10.705-123.516 27.723L93.117 129.6c28.546-11.803 61.484-18.115 92.226-18.115 41.173 0 73.836 13.175 102.657 42.544 27.723-28.271 59.013-41.721 98.539-42.544zM569.07 448c-25.526 0-47.485-5.215-70.542-15.645-34.31-15.645-69.993-24.978-107.871-24.978-38.977 0-74.934 12.901-102.657 40.623-27.723-27.723-63.68-40.623-102.657-40.623-37.878 0-73.561 9.333-107.871 24.978C55.239 442.236 32.731 448 8.303 448H6.93L49.475 98.859C88.726 76.626 136.486 64 181.775 64 218.83 64 256.984 71.685 288 93.095 319.016 71.685 357.17 64 394.225 64c45.289 0 93.049 12.626 132.3 34.859L569.07 448zm-43.368-44.741l-34.036-280.246c-30.742-13.999-67.248-21.41-101.009-21.41-38.428 0-74.385 12.077-102.657 38.702-28.272-26.625-64.228-38.702-102.657-38.702-33.761 0-70.267 7.411-101.009 21.41L50.298 403.259c47.211-19.487 82.894-33.486 135.045-33.486 37.604 0 70.817 9.606 102.657 29.644 31.84-20.038 65.052-29.644 102.657-29.644 52.151 0 87.834 13.999 135.045 33.486z"/>
+                        </svg>
+                      </div>
+                      <div style="text-align: left; padding-left: 10px;  margin: 0;margin-top: 3%;">
+                        <h6 class=" bottom" style="font-size: 24px;  margin: 0;" id="title-box4"></h6>
+                        <p style="font-size: 15px; text-indent: 2em; margin-top: 14px; " id="content-box4"> 
+                        </p> 
+                      </div>
+                    </div>
+                  </a>
+            </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+        // 更新后的JavaScript（包含加载状态）
+        function submitQuestion(btn) {
+            const question = document.getElementById('question').value.trim();
+            const model = document.getElementById('modelSelect').value;
+            
+            if (!question) {
+                showToast('请输入有效问题');
+                return;
+            }
+
+            const btnText = btn.querySelector('.btn-text');
+            const loader = btn.querySelector('.loading-dots');
+            
+            // 切换按钮状态
+            btn.innerText = '正在加载...';
+            btn.disabled = true;
+            fetch(`/news/ask?question=${encodeURIComponent(question)}&model=${model}`)
+                .then(response => {
+                    if (!response.ok) throw new Error('网络响应异常');
+                    return response.json();
+                })
+                .then(data => {
+                    // 更新卡片内容
+                    data.forEach((item, index) => {
+                        const titleEl = document.getElementById(`title-box${index + 1}`);
+                        const contentEl = document.getElementById(`content-box${index + 1}`);
+                        if (titleEl && contentEl) {
+                            titleEl.textContent = item.模块主题;
+                            contentEl.textContent = item.本模块内容简介;
+                        }
+                    });
+                    
+                    // 显示卡片区域
+                    document.getElementById('section').style.display = 'flex';
+                })
+                .catch(error => {
+                    showToast(`请求失败: ${error.message}`);
+                })
+                .finally(() => {
+                    // 切换按钮状态
+                    btn.innerText = '开始学习';
+                    btn.disabled = false;
+                });
+        }
+
+        function showToast(message) {
+            // 实现Toast提示功能
+        }
+    </script>
+</body>
+</html>
